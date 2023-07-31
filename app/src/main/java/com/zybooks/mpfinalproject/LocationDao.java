@@ -6,16 +6,19 @@ import java.util.List;
 @Dao
 public interface LocationDao {
     @Query("SELECT * FROM Location")
-    List<Location> getAll();
+    List<Location> getAllLocations();
 
     @Query("DELETE FROM Location")
     void deleteAllLocations();
 
     @Query("SELECT * FROM Location WHERE location = :location")
-    List<Location> elementPresent(String location);
+    List<Location> getLocation(String location);
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLocation(Location location);
+
+    @Update
+    void updateLocation(Location location);
 
     @Delete
     void delete(Location location);
