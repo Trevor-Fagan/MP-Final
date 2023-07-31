@@ -19,7 +19,13 @@ public class MainActivity extends AppCompatActivity {
         LocationDao locationDao = db.locationDao();
 
         Location texas = new Location("Texas");
-        //locationDao.insertLocation(texas);
+
+        if (locationDao.elementPresent("Texas").size() > 0) {
+            Toast.makeText(getApplicationContext(), "Texas found!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Texas not found! Adding now.", Toast.LENGTH_SHORT).show();
+            locationDao.insertLocation(texas);
+        }
 
         List<Location> locations = locationDao.getAll();
         Toast.makeText(getApplicationContext(), locations.get(0).toString(), Toast.LENGTH_SHORT).show();

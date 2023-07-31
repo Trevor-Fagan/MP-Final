@@ -11,6 +11,9 @@ public interface LocationDao {
     @Query("DELETE FROM Location")
     void deleteAllLocations();
 
+    @Query("SELECT * FROM Location WHERE location = :location")
+    List<Location> elementPresent(String location);
+
     @Insert()
     void insertLocation(Location location);
 
